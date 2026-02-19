@@ -56,8 +56,8 @@ export function UeberUnsContent() {
                   { icon: Users, label: "Team", sub: "Gartengang" },
                   { icon: Award, label: "Tradition", sub: "Seit 1855" },
                 ].map((val) => (
-                  <div key={val.label} className="bg-mauk-cream rounded-xl p-4">
-                    <val.icon className="h-6 w-6 text-mauk-green mb-2" />
+                  <div key={val.label} className="bg-mauk-cream rounded-xl p-4 hover:shadow-md transition-all duration-300 group">
+                    <val.icon className="h-6 w-6 text-mauk-green mb-2 group-hover:text-mauk-green-light transition-colors" />
                     <div className="font-semibold text-mauk-dark text-sm">{val.label}</div>
                     <div className="text-xs text-mauk-dark/60">{val.sub}</div>
                   </div>
@@ -132,9 +132,9 @@ export function UeberUnsContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white rounded-2xl p-6 sm:p-8 text-center card-hover"
+                className="bg-white rounded-2xl p-6 sm:p-8 text-center card-hover border border-white hover:border-mauk-green-light/20 transition-all duration-300"
               >
-                <div className="w-20 h-20 mx-auto mb-4 bg-mauk-green/10 rounded-full flex items-center justify-center">
+                <div className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-mauk-green/10 to-mauk-green-light/10 rounded-full flex items-center justify-center">
                   <Users className="h-8 w-8 text-mauk-green" />
                 </div>
                 <span className="text-xs font-medium text-mauk-green-light bg-mauk-green-light/10 px-3 py-1 rounded-full">
@@ -151,7 +151,7 @@ export function UeberUnsContent() {
         </div>
       </section>
 
-      {/* Historie Timeline */}
+      {/* Historie Timeline – elegant gradient line */}
       <section className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <motion.div
@@ -174,8 +174,8 @@ export function UeberUnsContent() {
           </motion.div>
 
           <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-mauk-green/20 sm:-translate-x-0.5" />
+            {/* Timeline line – gradient */}
+            <div className="absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-mauk-green-light via-mauk-green to-mauk-green-light sm:-translate-x-0.5" />
 
             <div className="space-y-8 sm:space-y-12">
               {HISTORIE.map((meilenstein, index) => (
@@ -189,8 +189,8 @@ export function UeberUnsContent() {
                     index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
                   }`}
                 >
-                  {/* Dot */}
-                  <div className="absolute left-4 sm:left-1/2 w-3 h-3 bg-mauk-green rounded-full -translate-x-1.5 mt-1.5 z-10 ring-4 ring-mauk-warm" />
+                  {/* Dot – gradient styled */}
+                  <div className="absolute left-4 sm:left-1/2 w-4 h-4 rounded-full -translate-x-2 mt-1 z-10 bg-gradient-to-br from-mauk-green-light to-mauk-green ring-4 ring-mauk-warm shadow-sm" />
 
                   {/* Content */}
                   <div className={`ml-10 sm:ml-0 sm:w-1/2 ${
@@ -214,8 +214,20 @@ export function UeberUnsContent() {
       </section>
 
       {/* Nachhaltigkeit */}
-      <section className="py-16 sm:py-24 bg-mauk-green">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-center">
+      <section className="py-16 sm:py-24 bg-mauk-green relative overflow-hidden">
+        {/* Subtle pattern */}
+        <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="sustain-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <circle cx="20" cy="20" r="1" fill="white" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#sustain-pattern)" />
+          </svg>
+        </div>
+
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-center relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -48,7 +48,7 @@ export function SortimentContent() {
             </p>
           </motion.div>
 
-          {/* Categories Grid */}
+          {/* Categories Grid – improved cards */}
           <motion.div
             variants={container}
             initial="hidden"
@@ -60,7 +60,7 @@ export function SortimentContent() {
                 key={kategorie.id}
                 id={kategorie.id}
                 variants={item}
-                className="group bg-white rounded-2xl overflow-hidden border border-mauk-cream card-hover"
+                className="group bg-white rounded-2xl overflow-hidden border border-mauk-cream hover:border-mauk-green-light/30 transition-all duration-300 card-hover"
               >
                 {/* Image */}
                 <div className="relative h-48 sm:h-56 overflow-hidden">
@@ -72,7 +72,7 @@ export function SortimentContent() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-mauk-green/40 to-transparent" />
-                  <span className="absolute top-4 left-4 text-3xl">{kategorie.icon}</span>
+                  <span className="absolute top-4 left-4 text-3xl drop-shadow-sm">{kategorie.icon}</span>
                 </div>
 
                 {/* Content */}
@@ -91,42 +91,51 @@ export function SortimentContent() {
             ))}
           </motion.div>
 
-          {/* Additional Info */}
+          {/* Additional Info – decorative frame */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mt-16 bg-mauk-cream rounded-2xl p-8 sm:p-12 text-center"
+            className="mt-16 relative"
           >
-            <h3
-              className="text-2xl sm:text-3xl font-bold text-mauk-green mb-4"
-              style={{ fontFamily: "var(--font-serif)" }}
-            >
-              Noch mehr entdecken
-            </h3>
-            <p className="text-mauk-dark/70 max-w-2xl mx-auto mb-6">
-              Unser Sortiment wechselt saisonal und wird ständig erweitert. Besuchen Sie uns
-              vor Ort in Lauffen oder Ludwigsburg und lassen Sie sich von unserer Vielfalt
-              inspirieren. Unsere Fachberater stehen Ihnen gerne zur Seite.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                "Schnittblumen",
-                "Seidenblumen",
-                "Bepflanzte Schalen",
-                "Pflanzgefäße",
-                "Sämereien",
-                "Genuss",
-                "Bastelbedarf",
-              ].map((extra) => (
-                <span
-                  key={extra}
-                  className="bg-white text-mauk-green text-sm px-4 py-2 rounded-full"
-                >
-                  {extra}
-                </span>
-              ))}
+            {/* Ornamental border */}
+            <div className="absolute inset-0 rounded-2xl border-2 border-dashed border-mauk-green/10 -m-1 pointer-events-none" />
+            <div className="bg-mauk-cream rounded-2xl p-8 sm:p-12 text-center">
+              <div className="ornament-divider text-mauk-green/20 mb-6">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <path d="M8 0C8 0 11 5 11 8C11 11 8 16 8 16C8 16 5 11 5 8C5 5 8 0 8 0Z" fill="currentColor" />
+                </svg>
+              </div>
+              <h3
+                className="text-2xl sm:text-3xl font-bold text-mauk-green mb-4"
+                style={{ fontFamily: "var(--font-serif)" }}
+              >
+                Noch mehr entdecken
+              </h3>
+              <p className="text-mauk-dark/70 max-w-2xl mx-auto mb-6">
+                Unser Sortiment wechselt saisonal und wird ständig erweitert. Besuchen Sie uns
+                vor Ort in Lauffen oder Ludwigsburg und lassen Sie sich von unserer Vielfalt
+                inspirieren. Unsere Fachberater stehen Ihnen gerne zur Seite.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                {[
+                  "Schnittblumen",
+                  "Seidenblumen",
+                  "Bepflanzte Schalen",
+                  "Pflanzgefäße",
+                  "Sämereien",
+                  "Genuss",
+                  "Bastelbedarf",
+                ].map((extra) => (
+                  <span
+                    key={extra}
+                    className="bg-white text-mauk-green text-sm px-4 py-2 rounded-full border border-mauk-green/10 hover:border-mauk-green/20 transition-colors"
+                  >
+                    {extra}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

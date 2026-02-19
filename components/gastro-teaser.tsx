@@ -8,8 +8,20 @@ import { GASTRONOMIE } from "@/lib/data";
 
 export function GastroTeaser() {
   return (
-    <section className="py-16 sm:py-24 bg-mauk-green">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="py-16 sm:py-24 bg-mauk-green relative overflow-hidden">
+      {/* Decorative background pattern */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
+        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="gastro-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+              <circle cx="30" cy="30" r="1.5" fill="white" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#gastro-pattern)" />
+        </svg>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,10 +60,12 @@ export function GastroTeaser() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                {/* Refined gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 transition-all duration-500 group-hover:from-black/70" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 transition-transform duration-500 group-hover:-translate-y-2">
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    {/* Glassmorphism icon badge */}
+                    <div className="w-10 h-10 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
                       <UtensilsCrossed className="h-5 w-5 text-white" />
                     </div>
                     <span className="text-white/80 text-sm">
@@ -67,9 +81,9 @@ export function GastroTeaser() {
                   <p className="text-white/80 text-sm line-clamp-2 mb-3">
                     {GASTRONOMIE.restaurant.beschreibung}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-mauk-green-lighter font-medium text-sm group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-mauk-green-lighter font-medium text-sm group-hover:gap-2.5 transition-all duration-300">
                     Mehr erfahren
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </div>
@@ -92,10 +106,11 @@ export function GastroTeaser() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                {/* Refined gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 transition-all duration-500 group-hover:from-black/70" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 transition-transform duration-500 group-hover:-translate-y-2">
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <div className="w-10 h-10 bg-white/15 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20">
                       <TreePine className="h-5 w-5 text-white" />
                     </div>
                     <span className="text-white/80 text-sm">{GASTRONOMIE.seegrill.saison}</span>
@@ -109,9 +124,9 @@ export function GastroTeaser() {
                   <p className="text-white/80 text-sm line-clamp-2 mb-3">
                     {GASTRONOMIE.seegrill.beschreibung}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-mauk-green-lighter font-medium text-sm group-hover:gap-2 transition-all">
+                  <span className="inline-flex items-center gap-1 text-mauk-green-lighter font-medium text-sm group-hover:gap-2.5 transition-all duration-300">
                     Mehr erfahren
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </div>
               </div>

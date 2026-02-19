@@ -95,6 +95,14 @@
   --sidebar-accent-foreground: #0f4340;
   --sidebar-border: #e5e5e0;
   --sidebar-ring: #0f4340;
+
+  /* Extended Shadow System */
+  --shadow-sm: 0 1px 2px rgba(15, 67, 64, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 67, 64, 0.06), 0 1px 3px rgba(15, 67, 64, 0.04);
+  --shadow-lg: 0 8px 24px rgba(15, 67, 64, 0.08), 0 2px 8px rgba(15, 67, 64, 0.04);
+  --shadow-xl: 0 12px 40px rgba(15, 67, 64, 0.12), 0 4px 12px rgba(15, 67, 64, 0.06);
+  --shadow-2xl: 0 20px 60px rgba(15, 67, 64, 0.16), 0 8px 20px rgba(15, 67, 64, 0.08);
+  --shadow-glow: 0 0 20px rgba(113, 175, 63, 0.3);
 }
 
 @layer base {
@@ -107,6 +115,16 @@
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
   }
+
+  /* Selection color */
+  ::selection {
+    background-color: rgba(113, 175, 63, 0.25);
+    color: #0f4340;
+  }
+  ::-moz-selection {
+    background-color: rgba(113, 175, 63, 0.25);
+    color: #0f4340;
+  }
 }
 
 /* Smooth scrolling */
@@ -114,7 +132,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar – improved with hover */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -124,32 +142,151 @@ html {
 ::-webkit-scrollbar-thumb {
   background: #0f4340;
   border-radius: 4px;
+  transition: background 0.2s;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1a5f5b;
+  background: #71af3f;
 }
 
-/* Hero gradient overlay */
+/* Hero gradient overlay – enhanced with warm tones */
 .hero-gradient {
   background: linear-gradient(
     to bottom,
-    rgba(15, 67, 64, 0.5) 0%,
-    rgba(15, 67, 64, 0.2) 50%,
-    rgba(15, 67, 64, 0.7) 100%
+    rgba(15, 67, 64, 0.55) 0%,
+    rgba(15, 67, 64, 0.15) 40%,
+    rgba(37, 37, 36, 0.2) 60%,
+    rgba(15, 67, 64, 0.75) 100%
   );
 }
 
-/* Card hover effect */
+/* Card hover effect – improved multi-stage */
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(15, 67, 64, 0.12);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
 }
 
 /* Section divider */
 .section-divider {
   background: linear-gradient(to right, transparent, #0f4340, transparent);
   height: 1px;
+}
+
+/* ===== New Utility Classes ===== */
+
+/* Text gradient – green brand gradient for headings */
+.text-gradient {
+  background: linear-gradient(135deg, #0f4340, #71af3f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glass card – glassmorphism effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Botanical background pattern – subtle leaf motif */
+.botanical-bg {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(113, 175, 63, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(15, 67, 64, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(113, 175, 63, 0.03) 0%, transparent 40%);
+}
+
+/* Section wave – wavy transition between sections */
+.section-wave {
+  position: relative;
+}
+.section-wave::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: inherit;
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+/* Subtle bounce for hover effects */
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.5; }
+}
+.animate-scroll-bounce {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* Counter animation helper */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow pulse for CTA buttons */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(113, 175, 63, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(113, 175, 63, 0.5), 0 0 40px rgba(113, 175, 63, 0.2); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Ornamental divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(15, 67, 64, 0.15), transparent);
+}
+
+/* Footer wave separator */
+.footer-wave {
+  position: relative;
+}
+.footer-wave::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #0f4340;
+  clip-path: ellipse(55% 100% at 50% 100%);
 }

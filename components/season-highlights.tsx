@@ -72,42 +72,56 @@ export function SeasonHighlights() {
           </p>
         </motion.div>
 
-        {/* Highlights Grid */}
+        {/* Highlights Grid – asymmetric: first card featured (larger) */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
         >
-          {highlights.map((highlight) => (
-            <motion.div key={highlight.title} variants={item}>
-              <Link href={highlight.href} className="group block">
-                <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden card-hover">
+          {highlights.map((highlight, index) => (
+            <motion.div
+              key={highlight.title}
+              variants={item}
+              className={index === 0 ? "md:row-span-2" : ""}
+            >
+              <Link href={highlight.href} className="group block h-full">
+                <div className={`relative rounded-2xl overflow-hidden card-hover h-full ${
+                  index === 0 ? "h-80 sm:h-full min-h-[400px]" : "h-64 sm:h-[calc(50%-12px)]"
+                }`}>
                   <Image
                     src={highlight.image}
                     alt={highlight.title}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes={index === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 100vw, 50vw"}
                   />
+                  {/* Deeper overlay gradients */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-t ${highlight.color} via-transparent to-black/30`}
+                    className={`absolute inset-0 bg-gradient-to-t ${highlight.color} via-black/10 to-black/40`}
                   />
-                  <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between">
-                    <span className="self-start bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                  {/* Content slides up on hover */}
+                  <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-between transition-transform duration-500 group-hover:-translate-y-1">
+                    {/* Badge – glassmorphism */}
+                    <span className="self-start bg-white/15 backdrop-blur-md text-white text-xs font-semibold px-4 py-1.5 rounded-full border border-white/10">
                       {highlight.subtitle}
                     </span>
                     <div>
-                      <h3 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-serif)" }}>
+                      <h3
+                        className={`font-bold text-white mb-2 ${
+                          index === 0 ? "text-3xl sm:text-4xl" : "text-2xl"
+                        }`}
+                        style={{ fontFamily: "var(--font-serif)" }}
+                      >
                         {highlight.title}
                       </h3>
-                      <p className="text-white/90 text-sm mb-3 line-clamp-2">
+                      <p className={`text-white/90 text-sm mb-3 ${index === 0 ? "line-clamp-3 max-w-md" : "line-clamp-2"}`}>
                         {highlight.description}
                       </p>
-                      <span className="inline-flex items-center gap-1 text-white font-medium text-sm group-hover:gap-2 transition-all">
+                      <span className="inline-flex items-center gap-1 text-white font-medium text-sm group-hover:gap-2.5 transition-all duration-300">
                         Mehr erfahren
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
                     </div>
                   </div>

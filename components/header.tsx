@@ -37,23 +37,29 @@ export function Header() {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-mauk-green text-white/90 text-sm">
+      {/* Top Bar – refined gradient */}
+      <div className="hidden lg:block bg-gradient-to-r from-mauk-green via-mauk-green to-[#0a3634] text-white/90 text-sm">
         <div className="mx-auto max-w-7xl px-6 py-2 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <a
               href={`tel:${STANDORTE[0].telefon.replace(/\s|-/g, "")}`}
-              className="flex items-center gap-1.5 hover:text-white transition-colors"
+              className="flex items-center gap-2 hover:text-white transition-colors"
             >
-              <Phone className="h-3.5 w-3.5" />
+              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                <Phone className="h-3 w-3" />
+              </div>
               {STANDORTE[0].telefon}
             </a>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
+            <span className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                <MapPin className="h-3 w-3" />
+              </div>
               Lauffen &amp; Ludwigsburg
             </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-3.5 w-3.5" />
+            <span className="flex items-center gap-2">
+              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                <Clock className="h-3 w-3" />
+              </div>
               Mo–Fr 9–19 Uhr
             </span>
           </div>
@@ -66,6 +72,7 @@ export function Header() {
             >
               Facebook
             </a>
+            <span className="w-px h-3 bg-white/20" />
             <a
               href={COMPANY.social.instagram}
               target="_blank"
@@ -81,16 +88,16 @@ export function Header() {
       {/* Main Navigation */}
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-300",
+          "sticky top-0 z-50 transition-all duration-500",
           scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-md"
+            ? "bg-white/90 backdrop-blur-xl shadow-[0_4px_30px_rgba(15,67,64,0.08)] border-b border-mauk-green/5"
             : "bg-white"
         )}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex h-16 sm:h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="shrink-0">
+            <Link href="/" className="shrink-0 relative">
               <Image
                 src="https://www.pflanzen-mauk.de/content/files/149/Gruppe-10-r1-195x60-proportionalexacttop.webp"
                 alt="Pflanzen Mauk Gartencenter – Logo"
@@ -101,29 +108,45 @@ export function Header() {
               />
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation – animated underline hover */}
             <nav className="hidden lg:flex items-center gap-1">
-              {NAVIGATION.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "px-3 xl:px-4 py-2 rounded-lg text-sm font-medium transition-colors",
-                    pathname === item.href
-                      ? "bg-mauk-green text-white"
-                      : "text-mauk-dark hover:text-mauk-green hover:bg-mauk-cream"
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {NAVIGATION.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "relative px-3 xl:px-4 py-2 text-sm font-medium transition-colors",
+                      isActive
+                        ? "text-mauk-green"
+                        : "text-mauk-dark hover:text-mauk-green"
+                    )}
+                  >
+                    {item.label}
+                    {/* Animated underline indicator */}
+                    <span
+                      className={cn(
+                        "absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-mauk-green-light transition-all duration-300",
+                        isActive
+                          ? "opacity-100 scale-x-100"
+                          : "opacity-0 scale-x-0 group-hover:opacity-100"
+                      )}
+                    />
+                    {/* Hover underline for non-active items */}
+                    {!isActive && (
+                      <span className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full bg-mauk-green/30 scale-x-0 hover:scale-x-100 transition-transform duration-300 origin-left" />
+                    )}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
               <Link
                 href="/kontakt"
-                className="hidden sm:inline-flex items-center gap-2 bg-mauk-green-light hover:bg-mauk-green text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors"
+                className="hidden sm:inline-flex items-center gap-2 bg-mauk-green-light hover:bg-mauk-green text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(113,175,63,0.4)]"
               >
                 Jetzt besuchen
               </Link>

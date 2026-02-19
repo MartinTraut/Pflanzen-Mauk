@@ -43,40 +43,47 @@ export function KontaktContent() {
               className="lg:col-span-2 space-y-8"
             >
               {STANDORTE.map((standort) => (
-                <div key={standort.id} className="bg-white rounded-2xl p-6 border border-mauk-cream">
-                  <h3 className="text-lg font-bold text-mauk-green mb-4" style={{ fontFamily: "var(--font-serif)" }}>
-                    {standort.stadt}
-                  </h3>
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="h-4 w-4 mt-0.5 text-mauk-green-light shrink-0" />
-                      <span className="text-mauk-dark/70">
-                        {standort.adresse}, {standort.plz} {standort.ort}
-                      </span>
-                    </div>
-                    <a
-                      href={`tel:${standort.telefon.replace(/\s|-/g, "")}`}
-                      className="flex items-center gap-3 text-mauk-dark hover:text-mauk-green transition-colors"
-                    >
-                      <Phone className="h-4 w-4 text-mauk-green-light shrink-0" />
-                      <span className="font-medium">{standort.telefon}</span>
-                    </a>
-                    <a
-                      href={`mailto:${standort.email}`}
-                      className="flex items-center gap-3 text-mauk-dark hover:text-mauk-green transition-colors"
-                    >
-                      <Mail className="h-4 w-4 text-mauk-green-light shrink-0" />
-                      <span className="font-medium">{standort.email}</span>
-                    </a>
-                    <div className="flex items-start gap-3">
-                      <Clock className="h-4 w-4 mt-0.5 text-mauk-green-light shrink-0" />
-                      <div>
-                        {standort.oeffnungszeiten.map((oz, i) => (
-                          <div key={i} className="flex justify-between gap-3">
-                            <span className="text-mauk-dark/70">{oz.label}:</span>
-                            <span className="font-medium text-mauk-dark">{oz.zeit}</span>
-                          </div>
-                        ))}
+                <div
+                  key={standort.id}
+                  className="bg-white rounded-2xl overflow-hidden border border-mauk-cream hover:border-mauk-green-light/20 transition-all duration-300 card-hover"
+                >
+                  {/* Green accent top border */}
+                  <div className="h-1 bg-gradient-to-r from-mauk-green via-mauk-green-light to-mauk-green" />
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-mauk-green mb-4" style={{ fontFamily: "var(--font-serif)" }}>
+                      {standort.stadt}
+                    </h3>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-start gap-3">
+                        <MapPin className="h-4 w-4 mt-0.5 text-mauk-green-light shrink-0" />
+                        <span className="text-mauk-dark/70">
+                          {standort.adresse}, {standort.plz} {standort.ort}
+                        </span>
+                      </div>
+                      <a
+                        href={`tel:${standort.telefon.replace(/\s|-/g, "")}`}
+                        className="flex items-center gap-3 text-mauk-dark hover:text-mauk-green transition-colors"
+                      >
+                        <Phone className="h-4 w-4 text-mauk-green-light shrink-0" />
+                        <span className="font-medium">{standort.telefon}</span>
+                      </a>
+                      <a
+                        href={`mailto:${standort.email}`}
+                        className="flex items-center gap-3 text-mauk-dark hover:text-mauk-green transition-colors"
+                      >
+                        <Mail className="h-4 w-4 text-mauk-green-light shrink-0" />
+                        <span className="font-medium">{standort.email}</span>
+                      </a>
+                      <div className="flex items-start gap-3">
+                        <Clock className="h-4 w-4 mt-0.5 text-mauk-green-light shrink-0" />
+                        <div>
+                          {standort.oeffnungszeiten.map((oz, i) => (
+                            <div key={i} className="flex justify-between gap-3">
+                              <span className="text-mauk-dark/70">{oz.label}:</span>
+                              <span className="font-medium text-mauk-dark">{oz.zeit}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -84,7 +91,7 @@ export function KontaktContent() {
               ))}
 
               {/* Additional Contact */}
-              <div className="bg-mauk-cream rounded-2xl p-6">
+              <div className="bg-mauk-cream rounded-2xl p-6 border border-mauk-green/5">
                 <h3 className="font-semibold text-mauk-green mb-3">Weitere Kontakte</h3>
                 <div className="space-y-2 text-sm">
                   <p className="text-mauk-dark/70">

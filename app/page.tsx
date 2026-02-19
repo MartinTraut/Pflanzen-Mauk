@@ -6,6 +6,7 @@ import { EventsTeaser } from "@/components/events-teaser";
 import { GastroTeaser } from "@/components/gastro-teaser";
 import { LocationsSection } from "@/components/locations-section";
 import { CTASection } from "@/components/cta-section";
+import { NewsletterSection } from "@/components/newsletter-section";
 
 export default function HomePage() {
   return (
@@ -17,6 +18,7 @@ export default function HomePage() {
       <EventsTeaser />
       <GastroTeaser />
       <CTASection />
+      <NewsletterSection />
       <LocationsSection />
     </>
   );

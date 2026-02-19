@@ -20,19 +20,26 @@ const item = {
 function getKategorieBadge(kategorie: string) {
   switch (kategorie) {
     case "workshop":
-      return { label: "Workshop", className: "bg-mauk-green-light/10 text-mauk-green-light" };
+      return { label: "Workshop", className: "bg-mauk-green-light/10 text-mauk-green-light", borderColor: "border-l-mauk-green-light" };
     case "event":
-      return { label: "Event", className: "bg-mauk-red/10 text-mauk-red" };
+      return { label: "Event", className: "bg-mauk-red/10 text-mauk-red", borderColor: "border-l-mauk-red" };
     case "aktion":
-      return { label: "Aktion", className: "bg-mauk-earth/10 text-mauk-earth" };
+      return { label: "Aktion", className: "bg-mauk-earth/10 text-mauk-earth", borderColor: "border-l-mauk-earth" };
     default:
-      return { label: kategorie, className: "bg-gray-100 text-gray-600" };
+      return { label: kategorie, className: "bg-gray-100 text-gray-600", borderColor: "border-l-gray-400" };
   }
 }
 
 export function EventsTeaser() {
   return (
-    <section className="py-16 sm:py-24">
+    <section className="py-16 sm:py-24 relative">
+      {/* Decorative plant element behind text */}
+      <div className="absolute top-20 left-0 w-32 h-64 opacity-[0.03] pointer-events-none hidden lg:block">
+        <svg viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+          <path d="M50 200V80M50 80C50 80 20 60 10 30C0 0 50 20 50 80M50 80C50 80 80 50 90 20C100 -10 50 30 50 80M50 120C50 120 30 100 15 80C0 60 40 75 50 120M50 140C50 140 70 120 85 100C100 80 60 95 50 140" stroke="#0f4340" strokeWidth="2" />
+        </svg>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
           {/* Left: Header */}
@@ -58,14 +65,14 @@ export function EventsTeaser() {
             </p>
             <Link
               href="/events"
-              className="inline-flex items-center gap-2 bg-mauk-green hover:bg-mauk-green/90 text-white px-6 py-3 rounded-full font-semibold transition-colors"
+              className="inline-flex items-center gap-2 bg-mauk-green hover:bg-mauk-green/90 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_8px_25px_rgba(15,67,64,0.25)]"
             >
               Alle Events
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
 
-          {/* Right: Event Cards */}
+          {/* Right: Event Cards – with colored left border */}
           <motion.div
             variants={container}
             initial="hidden"
@@ -79,15 +86,15 @@ export function EventsTeaser() {
                 <motion.div
                   key={event.id}
                   variants={item}
-                  className="bg-white rounded-xl p-5 sm:p-6 border border-mauk-cream hover:border-mauk-green-light/30 transition-all card-hover"
+                  className={`group bg-white rounded-xl p-5 sm:p-6 border border-mauk-cream hover:border-mauk-green-light/30 transition-all duration-300 card-hover border-l-4 ${badge.borderColor}`}
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                    {/* Date Block */}
-                    <div className="shrink-0 w-16 h-16 bg-mauk-cream rounded-xl flex flex-col items-center justify-center">
-                      <span className="text-xs font-medium text-mauk-green/70 uppercase">
+                    {/* Date Block – gradient style */}
+                    <div className="shrink-0 w-16 h-16 bg-gradient-to-br from-mauk-green to-mauk-green/80 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                      <span className="text-[10px] font-medium text-white/80 uppercase">
                         {new Date(event.datum).toLocaleDateString("de-DE", { month: "short" })}
                       </span>
-                      <span className="text-xl font-bold text-mauk-green">
+                      <span className="text-xl font-bold text-white">
                         {new Date(event.datum).getDate()}
                       </span>
                     </div>
@@ -120,8 +127,10 @@ export function EventsTeaser() {
                       </div>
                     </div>
 
-                    {/* Arrow */}
-                    <ArrowRight className="hidden sm:block h-5 w-5 text-mauk-green/30 group-hover:text-mauk-green transition-colors shrink-0" />
+                    {/* Arrow – slide in from right on hover */}
+                    <div className="hidden sm:flex items-center shrink-0">
+                      <ArrowRight className="h-5 w-5 text-mauk-green/20 transition-all duration-300 group-hover:text-mauk-green group-hover:translate-x-1" />
+                    </div>
                   </div>
                 </motion.div>
               );
